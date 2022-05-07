@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddjvpovjg3rjf"]
+
+[ext_resource type="Script" path="res://Scenes/Items/jump_pad.gd" id="1_7qfbv"]
+[ext_resource type="Texture2D" uid="uid://rxyv4ot1cx8w" path="res://GFX/Items/spring.png" id="1_ybtql"]
+[ext_resource type="Texture2D" uid="uid://ctsbrd78mqdem" path="res://GFX/Items/spring_in.png" id="2_a8p67"]
+[ext_resource type="Texture2D" uid="uid://bqfqoslys1ufk" path="res://GFX/Items/spring_out.png" id="4_cl5m6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7c37"]
+animations = [{
+"frames": [ExtResource( "1_ybtql" ), ExtResource( "2_a8p67" )],
+"loop": true,
+"name": &"default",
+"speed": 1.5
+}, {
+"frames": [ExtResource( "2_a8p67" ), ExtResource( "4_cl5m6" )],
+"loop": false,
+"name": &"Boost",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4y2l"]
+size = Vector2(144.625, 76)
+
+[sub_resource type="Animation" id="Animation_cs0y6"]
+resource_name = "Boost"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"Boost", &"Boost", &"default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8q3pc"]
+_data = {
+"Boost": SubResource( "Animation_cs0y6" )
+}
+
+[node name="JumpPad" type="Area2D"]
+collision_layer = 8
+script = ExtResource( "1_7qfbv" )
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+frames = SubResource( "SpriteFrames_e7c37" )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( "RectangleShape2D_w4y2l" )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource( "AnimationLibrary_8q3pc" )
+}
+
+[connection signal="body_entered" from="." to="." method="_on_JumpPad_body_entered"]

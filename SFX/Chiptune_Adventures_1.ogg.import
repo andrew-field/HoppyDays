@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://can3vd6r7bunj"
+path="res://.godot/imported/Chiptune_Adventures_1.ogg-52fc949b19c914776132d8c6ca6f4122.oggvorbisstr"
+
+[deps]
+
+source_file="res://SFX/Chiptune_Adventures_1.ogg"
+dest_files=["res://.godot/imported/Chiptune_Adventures_1.ogg-52fc949b19c914776132d8c6ca6f4122.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
